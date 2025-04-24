@@ -1,0 +1,16 @@
+{
+	"m_ConfigObjects": {},
+	"m_HideFlags": 0,
+	"m_Scenes": [
+		{
+			"m_Enabled": true,
+			"m_Guid": {
+				"m_Data_0_": 1191687829,
+				"m_Data_1_": 1269679929,
+				"m_Data_2_": 323867819,
+				"m_Data_3_": 552103585
+			},
+			"m_Path": "Assets/Scenes/SampleScene.unity"
+		}
+	]
+}

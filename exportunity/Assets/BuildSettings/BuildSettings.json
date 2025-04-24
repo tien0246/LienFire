@@ -1,0 +1,35 @@
+{
+	"m_BuildGUID": {
+		"m_Data_0_": 2695963642,
+		"m_Data_1_": 1092367486,
+		"m_Data_2_": 3598453941,
+		"m_Data_3_": 3309637746
+	},
+	"m_BuildTags": [],
+	"m_EnabledVRDevices": [],
+	"m_EnableDynamicBatching": false,
+	"m_GraphicsAPIs": [
+		21,
+		11
+	],
+	"m_HasAdvancedVersion": false,
+	"m_HasClusterRendering": false,
+	"m_HasLocalLightShadows": true,
+	"m_HasPROVersion": false,
+	"m_HasPublishingRights": false,
+	"m_HasShadows": true,
+	"m_HasSoftShadows": true,
+	"m_HideFlags": 0,
+	"m_IsDebugBuild": false,
+	"m_IsEducationalBuild": false,
+	"m_IsEmbedded": false,
+	"m_IsNoWatermarkBuild": true,
+	"m_IsPrototypingBuild": false,
+	"m_IsTrial": false,
+	"m_PreloadedPlugins": [],
+	"m_Scenes": [
+		"Assets/Scenes/SampleScene.unity"
+	],
+	"m_UsesOnMouseEvents": false,
+	"m_Version": "2021.3.22f1"
+}

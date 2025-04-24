@@ -1,0 +1,8 @@
+namespace System.Security.Cryptography;
+
+internal enum HASHALGORITHM_ENUM
+{
+	DSA_HASH_ALGORITHM_SHA1 = 0,
+	DSA_HASH_ALGORITHM_SHA256 = 1,
+	DSA_HASH_ALGORITHM_SHA512 = 2
+}

@@ -1,0 +1,50 @@
+{
+	"m_Layers": [
+		"Default",
+		"TransparentFX",
+		"Ignore Raycast",
+		"Player",
+		"Water",
+		"UI",
+		"ragdoll",
+		"matDat",
+		"nhin qua",
+		"tuong",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		""
+	],
+	"m_SortingLayers": [
+		{
+			"m_Locked": false,
+			"m_Name": "Default",
+			"m_UniqueID": 0
+		}
+	],
+	"m_Tags": [
+		"matDat",
+		"tuong",
+		"model",
+		"linh",
+		"tru"
+	]
+}

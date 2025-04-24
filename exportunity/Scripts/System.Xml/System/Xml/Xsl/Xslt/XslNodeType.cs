@@ -1,0 +1,37 @@
+namespace System.Xml.Xsl.Xslt;
+
+internal enum XslNodeType
+{
+	Unknown = 0,
+	ApplyImports = 1,
+	ApplyTemplates = 2,
+	Attribute = 3,
+	AttributeSet = 4,
+	CallTemplate = 5,
+	Choose = 6,
+	Comment = 7,
+	Copy = 8,
+	CopyOf = 9,
+	Element = 10,
+	Error = 11,
+	ForEach = 12,
+	If = 13,
+	Key = 14,
+	List = 15,
+	LiteralAttribute = 16,
+	LiteralElement = 17,
+	Message = 18,
+	Nop = 19,
+	Number = 20,
+	Otherwise = 21,
+	Param = 22,
+	PI = 23,
+	Sort = 24,
+	Template = 25,
+	Text = 26,
+	UseAttributeSet = 27,
+	ValueOf = 28,
+	ValueOfDoe = 29,
+	Variable = 30,
+	WithParam = 31
+}
