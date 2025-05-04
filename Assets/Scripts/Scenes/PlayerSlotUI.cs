@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 public class PlayerSlotUI : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] Text nameText;
     [SerializeField] Image avatar;
     public void SetEmpty()
     {

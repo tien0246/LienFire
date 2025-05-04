@@ -12,7 +12,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] PlayerSlotUI[] teamASlots;
     [SerializeField] PlayerSlotUI[] teamBSlots;
     [SerializeField] Button startButton;
-    [SerializeField] TextMeshProUGUI roomIdText;
+    [SerializeField] Text roomIdText;
 
     void Start()
     {

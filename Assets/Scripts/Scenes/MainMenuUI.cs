@@ -48,6 +48,6 @@ public class MainMenuUI : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        SceneManager.LoadScene("LobbyScene");
+        SceneManager.LoadScene("hehe");
     }
 }
