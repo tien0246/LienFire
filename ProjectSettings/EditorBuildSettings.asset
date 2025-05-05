@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/hehe.unity
     guid: 240e77257f2471f4882c27bfb2108821
+  - enabled: 1
+    path: Assets/Scenes/Map_v2.unity
+    guid: 9990eddd9dd28ed449fa2abda22b38fa
   m_configObjects: {}

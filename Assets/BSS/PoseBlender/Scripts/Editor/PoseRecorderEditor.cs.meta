@@ -1,9 +1,0 @@
-fileFormatVersion: 2
-guid: e4df3154c474b0644adf72243d34da22
-AssetOrigin:
-  serializedVersion: 1
-  productId: 313357
-  packageName: Pose Blender Lite
-  packageVersion: 1.1.0
-  assetPath: Assets/BSS/PoseBlender/Scripts/Editor/PoseRecorderEditor.cs
-  uploadId: 740906

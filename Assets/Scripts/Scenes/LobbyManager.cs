@@ -92,7 +92,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void StartMatch()
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.LoadLevel("GameScene");
+        PhotonNetwork.LoadLevel("Map_v2");
     }
 
     public void SwitchLocalTeam()
