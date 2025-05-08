@@ -14,7 +14,7 @@ public class MainMenuUI : MonoBehaviourPunCallbacks
         if (nameInput.text == "") nameInput.text = "Player" + Random.Range(0, 1000);
         PhotonNetwork.NickName = nameInput.text;
         PhotonNetwork.OfflineMode = true;
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Map_v1");
     }
 
     public void OnClickOnline()

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
@@ -40,7 +40,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void AssignInitialTeam()
     {
-        string team = Count("A") <= Count("B") ? "A" : "B";
+        string team = Count("A") <= Count("B") ? "A" : "B"; // Đảm bảo đội có số người ít hơn được chọn
         var ht = new ExitGames.Client.Photon.Hashtable { [TEAM_KEY] = team };
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
     }
@@ -92,7 +92,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void StartMatch()
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.LoadLevel("Map_v2");
+        PhotonNetwork.LoadLevel("Map_v2");  // Chuyển sang scene "Map_v2" khi trận đấu bắt đầu
     }
 
     public void SwitchLocalTeam()
@@ -103,9 +103,23 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (Count(target) >= 3) return;
         var ht = new ExitGames.Client.Photon.Hashtable { [TEAM_KEY] = target };
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
+
+        // Không spawn trong lobby, spawn lại khi vào trận
     }
 
     public override void OnPlayerEnteredRoom(Player _) => UpdateAll();
-    public override void OnPlayerLeftRoom(Player _)    => UpdateAll();
+    public override void OnPlayerLeftRoom(Player _) => UpdateAll();
     public override void OnPlayerPropertiesUpdate(Player _, ExitGames.Client.Photon.Hashtable __) => UpdateAll();
+
+    public override void OnJoinedRoom()
+    {
+        string team = Count("A") <= Count("B") ? "A" : "B";  // Chọn đội có số người ít hơn
+
+        // Lưu đội của người chơi vào Custom Properties
+        ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
+        playerProperties["team"] = team;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
+
+        UpdateAll();  // Cập nhật UI sau khi gia nhập phòng
+    }
 }

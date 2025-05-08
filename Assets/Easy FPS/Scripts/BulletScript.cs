@@ -1,41 +1,43 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class BulletScript : MonoBehaviour {
+public class BulletScript : MonoBehaviour
+{
+    public float maxDistance = 100f;  // Khoảng cách tối đa viên đạn có thể bay
+    RaycastHit hit;
+    public GameObject decalHitWall;
+    public float floatInfrontOfWall = 0.1f;
+    public GameObject bloodEffect;
+    public LayerMask ignoreLayer;  // Để bỏ qua va chạm với Layer của Player hoặc Weapon
 
-	[Tooltip("Furthest distance bullet will look for target")]
-	public float maxDistance = 1000000;
-	RaycastHit hit;
-	[Tooltip("Prefab of wall damange hit. The object needs 'LevelPart' tag to create decal on it.")]
-	public GameObject decalHitWall;
-	[Tooltip("Decal will need to be sligtly infront of the wall so it doesnt cause rendeing problems so for best feel put from 0.01-0.1.")]
-	public float floatInfrontOfWall;
-	[Tooltip("Blood prefab particle this bullet will create upoon hitting enemy")]
-	public GameObject bloodEffect;
-	[Tooltip("Put Weapon layer and Player layer to ignore bullet raycast.")]
-	public LayerMask ignoreLayer;
+    void Update()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, ~ignoreLayer)) // ~ignoreLayer là để bỏ qua các Layer không muốn va chạm
+        {
+            // Kiểm tra xem Raycast có va chạm với Zombie không
+            if (hit.collider.CompareTag("Zombie"))
+            {
+                ZombieAI zombie = hit.collider.GetComponent<ZombieAI>();
 
-	/*
-	* Uppon bullet creation with this script attatched,
-	* bullet creates a raycast which searches for corresponding tags.
-	* If raycast finds somethig it will create a decal of corresponding tag.
-	*/
-	void Update () {
+                if (zombie != null)
+                {
+                    // Tạo hiệu ứng máu khi viên đạn trúng Zombie
+                    Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
 
-		if(Physics.Raycast(transform.position, transform.forward,out hit, maxDistance, ~ignoreLayer)){
-			if(decalHitWall){
-				if(hit.transform.tag == "LevelPart"){
-					Instantiate(decalHitWall, hit.point + hit.normal * floatInfrontOfWall, Quaternion.LookRotation(hit.normal));
-					Destroy(gameObject);
-				}
-				if(hit.transform.tag == "Dummie"){
-					Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
-					Destroy(gameObject);
-				}
-			}		
-			Destroy(gameObject);
-		}
-		Destroy(gameObject, 0.1f);
-	}
+                    // Gọi phương thức TakeDamage để giảm máu của Zombie
+                    zombie.TakeDamage(1);  // 1 là damage của viên đạn
+                }
 
+                Destroy(gameObject);  // Hủy viên đạn sau khi va chạm
+            }
+            // Kiểm tra va chạm với bề mặt
+            else if (hit.transform.CompareTag("LevelPart"))
+            {
+                // Tạo hiệu ứng decal nếu viên đạn va vào bề mặt
+                Instantiate(decalHitWall, hit.point + hit.normal * floatInfrontOfWall, Quaternion.LookRotation(hit.normal));
+                Destroy(gameObject);  // Hủy viên đạn sau khi va chạm
+            }
+        }
+        // Hủy viên đạn nếu không va chạm
+        Destroy(gameObject, 0.1f);
+    }
 }
