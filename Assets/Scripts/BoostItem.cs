@@ -11,8 +11,13 @@ public class BoostItem : MonoBehaviour
         // Kiểm tra xem có phải Player nhặt vật phẩm không
         if (other.CompareTag("Player"))
         {
-            // Gọi hàm để tăng tốc độ và nhảy
-            other.GetComponent<PlayerBoost>().ActivateBoost(speedBoost, jumpBoost, boostDuration);
+            PlayerMovementScript playerBoost = other.GetComponent<PlayerMovementScript>();
+            if (playerBoost != null)
+            {
+                // Gọi hàm ActivateBoost từ PlayerBoost
+                playerBoost.maxSpeed += 5;
+                playerBoost.currentSpeed += 5;  
+            }
             Destroy(gameObject);  // Hủy vật phẩm sau khi nhặt
         }
     }

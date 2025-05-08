@@ -29,13 +29,7 @@ public class BulletScript : MonoBehaviour
 
                 Destroy(gameObject);  // Hủy viên đạn sau khi va chạm
             }
-            // Kiểm tra va chạm với bề mặt
-            else if (hit.transform.CompareTag("LevelPart"))
-            {
-                // Tạo hiệu ứng decal nếu viên đạn va vào bề mặt
-                Instantiate(decalHitWall, hit.point + hit.normal * floatInfrontOfWall, Quaternion.LookRotation(hit.normal));
-                Destroy(gameObject);  // Hủy viên đạn sau khi va chạm
-            }
+            // Kiểm tra va chạm với bề 
         }
         // Hủy viên đạn nếu không va chạm
         Destroy(gameObject, 0.1f);

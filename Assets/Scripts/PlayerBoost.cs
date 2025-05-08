@@ -3,33 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 public class PlayerBoost : MonoBehaviour
 {
-    private CharacterController characterController;
+    private Rigidbody rb;  // Rigidbody của Player
 
     private float originalSpeed;
-    private float originalJumpHeight;
     private float currentSpeed;
-    private float currentJumpHeight;
+
+    private float originalJumpForce;
+    private float currentJumpForce;
 
     private float gravity = -9.8f;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();  // Lấy Rigidbody của Player
 
-        // Lưu lại các giá trị ban đầu của speed và jumpHeight
-        originalSpeed = 5f;  // Gán giá trị speed mặc định
-        originalJumpHeight = 2f;  // Gán giá trị jumpHeight mặc định
+        // Lưu lại tốc độ và lực nhảy ban đầu
+        originalSpeed = 5f;  // Tốc độ mặc định
+        originalJumpForce = 500f;  // Lực nhảy mặc định
         currentSpeed = originalSpeed;
-        currentJumpHeight = originalJumpHeight;
+        currentJumpForce = originalJumpForce;
     }
 
     void Update()
     {
-        // Di chuyển người chơi
+        // Di chuyển Player
         MovePlayer();
 
         // Kiểm tra nếu người chơi nhảy
-        if (characterController.isGrounded && Input.GetButtonDown("Jump"))
+        if (rb.velocity.y == 0 && Input.GetButtonDown("Jump"))  // Kiểm tra Player có đứng trên mặt đất không
         {
             Jump();
         }
@@ -37,28 +38,18 @@ public class PlayerBoost : MonoBehaviour
 
     void MovePlayer()
     {
+        // Di chuyển dựa trên Input
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 moveDirection = new Vector3(horizontal, 0, vertical);
-        moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection *= currentSpeed;
-
-        moveDirection.y += gravity * Time.deltaTime;  // Thêm lực trọng lực cho nhảy
-
-        characterController.Move(moveDirection * Time.deltaTime);
+        Vector3 moveDirection = new Vector3(horizontal, 0, vertical).normalized * currentSpeed * Time.deltaTime;
+        rb.MovePosition(transform.position + moveDirection);
     }
 
-    void Jump()
+    public void ActivateBoost(float speedBoost, float jumpBoost, float duration)
     {
-        Vector3 jump = new Vector3(0, currentJumpHeight, 0);
-        characterController.Move(jump * Time.deltaTime);
-    }
-
-    public void ActivateBoost(float speed, float jumpHeight, float duration)
-    {
-        currentSpeed = originalSpeed + speed;  // Tăng tốc độ chạy
-        currentJumpHeight = originalJumpHeight + jumpHeight;  // Tăng chiều cao nhảy
+        currentSpeed = originalSpeed + speedBoost;  // Tăng tốc độ chạy
+        currentJumpForce = originalJumpForce + jumpBoost;  // Tăng chiều cao nhảy
 
         // Hủy boost sau một khoảng thời gian
         StartCoroutine(ResetBoost(duration));
@@ -69,6 +60,15 @@ public class PlayerBoost : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         currentSpeed = originalSpeed;  // Khôi phục tốc độ gốc
-        currentJumpHeight = originalJumpHeight;  // Khôi phục chiều cao nhảy gốc
+        currentJumpForce = originalJumpForce;  // Khôi phục chiều cao nhảy gốc
+    }
+
+    // Hàm nhảy
+    public void Jump()
+    {
+        if (rb.velocity.y == 0)  // Kiểm tra nếu Player đang đứng trên mặt đất
+        {
+            rb.AddForce(Vector3.up * currentJumpForce);  // Thêm lực nhảy vào Player
+        }
     }
 }

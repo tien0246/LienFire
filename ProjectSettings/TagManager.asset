@@ -8,6 +8,8 @@ TagManager:
   - BulletSpawn
   - Weapon
   - Zombie
+  - BoostItem
+  - LevelPart
   layers:
   - Default
   - TransparentFX
